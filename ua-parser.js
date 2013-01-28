@@ -8,7 +8,7 @@
 (function (global, undefined) {
 
     'use strict';
-    
+
     var EMPTY       = '',
         FUNC        = 'function',
         UNDEF       = 'undefined',
@@ -97,14 +97,14 @@
     };
 
     var maps = {
-        
-        browser : {        
-            oldsafari : {            
+
+        browser : {
+            oldsafari : {
                 major : {
                     '1' : ['/85', '/125', '/312'],
                     '2' : ['/412', '/416', '/417', '/419'],
                     'undefined' : '/'
-                },                
+                },
                 version : {
                     '1.0'   : '/85',
                     '1.2'   : '/125',
@@ -117,8 +117,8 @@
                 }
             }
         },
-        
-        device : {        
+
+        device : {
             sprint : {
                 model : {
                     'Evo Shift 4G' : '7373KT'
@@ -128,9 +128,9 @@
                 }
             }
         },
-        
-        os : {        
-            windows : {            
+
+        os : {
+            windows : {
                 version : {
                     'ME'        : '4.90',
                     'NT 3.11'   : 'NT3.51',
@@ -170,29 +170,29 @@
             /(chromium|flock|rockmelt|midori|epiphany|silk|skyfire|ovibrowser|bolt)\/((\d+)?[\w\.-]+)/i
                                                                                 // Chromium/Flock/RockMelt/Midori/Epiphany/Silk/Skyfire/Bolt
             ], [NAME, VERSION, MAJOR], [
-            
+
             /(yabrowser)\/((\d+)?[\w\.]+)/i                                     // Yandex
             ], [[NAME, 'Yandex'], VERSION, MAJOR], [
-            
+
             /(chrome|omniweb|arora|[tizenoka]{5}\s?browser)\/v?((\d+)?[\w\.]+)/i
                                                                                 // Chrome/OmniWeb/Arora/Tizen/Nokia
             ], [NAME, VERSION, MAJOR], [
-            
+
             /(dolfin)\/((\d+)?[\w\.]+)/i                                        // Dolphin
             ], [[NAME, 'Dolphin'], VERSION, MAJOR], [
-            
+
             /((?:android.+)crmo|crios)\/((\d+)?[\w\.]+)/i                       // Chrome for Android/iOS
             ], [[NAME, 'Chrome'], VERSION, MAJOR], [
-            
+
             /version\/((\d+)?[\w\.]+).+?mobile\/\w+\s(safari)/i                 // Mobile Safari
             ], [VERSION, MAJOR, [NAME, 'Mobile Safari']], [
-            
+
             /version\/((\d+)?[\w\.]+).+?(mobile\s?safari|safari)/i              // Safari & Safari Mobile
             ], [VERSION, MAJOR, NAME], [
-            
+
             /applewebkit.+?(mobile\s?safari|safari)((\/[\w\.]+))/i              // Safari < 3.0
             ], [NAME, [MAJOR, mapper.string, maps.browser.oldsafari.major], [VERSION, mapper.string, maps.browser.oldsafari.version]], [
-            
+
             /(konqueror)\/((\d+)?[\w\.]+)/i,                                    // Konqueror
             /(applewebkit|khtml)\/((\d+)?[\w\.]+)/i
             ], [NAME, VERSION, MAJOR], [
@@ -219,7 +219,7 @@
 
             /\((ipad|playbook);[\w\s\);-]+(rim|apple)/i                         // iPad/PlayBook
             ], [MODEL, VENDOR, [TYPE, TABLET]], [
-            
+
             /(hp).+(touchpad)/i,                                                // HP TouchPad
             /(kindle)\/([\w\.]+)/i,                                             // Kindle
             /\s(nook)[\w\s]+build\/(\w+)/i,                                     // Nook
@@ -228,7 +228,7 @@
 
             /\((ip[honed]+);.+(apple)/i                                         // iPod/iPhone
             ], [MODEL, VENDOR, [TYPE, MOBILE]], [
-            
+
             /(blackberry)[\s-]?(\w+)/i,                                         // BlackBerry
             /(blackberry|benq|palm(?=\-)|sonyericsson|acer|asus|dell|huawei|meizu|motorola)[\s_-]?([\w-]+)*/i,
                                                                                 // BenQ/Palm/Sony-Ericsson/Acer/Asus/Dell/Huawei/Meizu/Motorola
@@ -246,11 +246,11 @@
 
             /(nintendo|playstation)\s([wids3portablev]+)/i                      // Nintendo/Playstation
             ], [VENDOR, MODEL, [TYPE, CONSOLE]], [
-            
+
             /(sprint\s[a-z]+)(\w+)/i                                            // Sprint Phones
             ], [[VENDOR, mapper.string, maps.device.sprint.vendor], [MODEL, mapper.string, maps.device.sprint.model], [TYPE, MOBILE]], [
-            
-            /(htc)[;_\s-]+([\w\s]+(?=\))|\w+)*/i,                               // HTC            
+
+            /(htc)[;_\s-]+([\w\s]+(?=\))|\w+)*/i,                               // HTC
             /(zte)-(\w+)*/i,                                                    // ZTE
             /(alcatel|geeksphone|huawei|lenovo|nexian|panasonic|;\ssony)[_\s-]?([\w-]+)*/i
                                                                                 // Alcatel/GeeksPhone/Huawei/Lenovo/Nexian/Panasonic/Sony
@@ -282,7 +282,7 @@
             ], [[VENDOR, 'LG'], MODEL, [TYPE, TABLET]], [
             /(lg)[e;\s-\/]+(\w+)*/i
             ], [[VENDOR, 'LG'], MODEL, [TYPE, MOBILE]], [
-            
+
             /(mobile|tablet);.+rv\:.+gecko\//i                                  // Unidentifiable
             ], [TYPE, VENDOR, MODEL]
         ],
@@ -352,7 +352,7 @@
 
             // Other
             /(haiku)\s(\w+)/i,                                                  // Haiku
-            /(aix)\s((\d)(?=\.|\)|\s)[\w\.]*)*/i,                               // AIX                    
+            /(aix)\s((\d)(?=\.|\)|\s)[\w\.]*)*/i,                               // AIX
             /(macintosh|mac(?=_powerpc)|plan\s9|minix|beos|os\/2|amigaos|morphos)/i,
                                                                                 // Plan9/Minix/BeOS/OS2/AmigaOS/MorphOS
             /(unix)\s?([\w\.]+)*/i                                              // UNIX
@@ -361,6 +361,7 @@
     };
 
     var UAParser = function UAParser (uastring) {
+        if (!(this instanceof UAParser)) return new UAParser(uastring).getResult();
 
         var ua = uastring || ((global && global.navigator && global.navigator.userAgent) ? global.navigator.userAgent : EMPTY);
 
@@ -401,15 +402,5 @@
         this.setUA(ua);
     };
 
-    // check js environment    
-    if (typeof exports !== UNDEF && !/\[object\s[DOM]*Window\]/.test(global.toString())) {
-        // nodejs env
-        if (typeof module !== UNDEF && module.exports) {
-            exports = module.exports = UAParser;
-        }
-        exports.UAParser = UAParser;
-    } else {
-        // browser env
-        global['UAParser'] = UAParser;
-    }
+    module.exports = UAParser;
 })(this);
