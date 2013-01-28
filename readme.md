@@ -9,6 +9,18 @@ Lightweight JavaScript-based User-Agent string parser
 * Source    : https://github.com/faisalman/ua-parser-js
 * License   : GPLv2 & MIT
 
+## Installation
+
+    $ component install component/user-agent-parser
+
+## Example
+
+```js
+var parse = require('user-agent-parser');
+parse('user agent string')
+// => Object
+```
+
 ## Features
 
 Extract detailed type of web browser, layout engine, operating system, and device purely from user-agent string.
@@ -30,9 +42,9 @@ Extract detailed type of web browser, layout engine, operating system, and devic
 ```html
 <script type="text/javascript" src="ua-parser.js"></script>
 <script type="text/javascript">
-    
+
 	var parser = new UAParser();
-	
+
     // by default it takes ua string from current browser's window.navigator.userAgent
     console.log(parser.getResult());
     /*
@@ -62,12 +74,12 @@ Extract detailed type of web browser, layout engine, operating system, and devic
     // let's test a custom user-agent string as an example
     var uastr = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.2 (KHTML, like Gecko) Ubuntu/11.10 Chromium/15.0.874.106 Chrome/15.0.874.106 Safari/535.2";
     parser.setUA(uastr);
-    
+
     console.log(parser.getResult().browser);    // {name: "Chromium", major: "15", version: "15.0.874.106"}
     console.log(parser.getResult().device);     // {model: undefined, type: undefined, vendor: undefined}
     console.log(parser.getResult().engine);     // {name: "WebKit", version: "535.2"}
     console.log(parser.getResult().os);         // {name: "Ubuntu", version: "11.10"}
-    
+
     // let's take another test please
     console.log(parser.setUA("Mozilla/5.0 (compatible; Konqueror/4.1; OpenBSD) KHTML/4.1.4 (like Gecko)").getBrowser().name); // "Konqueror"
     console.log(parser.getOS());                // {name: "OpenBSD", version: undefined}
@@ -95,12 +107,12 @@ console.log(parser.getEngine().name);                   // "WebKit"
 
 Copyright © 2012 Faisalman <<fyzlman@gmail.com>>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of 
-this software and associated documentation files (the "Software"), to deal in 
-the Software without restriction, including without limitation the rights to use, 
-copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
-Software, and to permit persons to whom the Software is furnished to do so, 
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so,
 subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all 
+The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
