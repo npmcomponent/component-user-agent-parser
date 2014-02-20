@@ -1,3 +1,4 @@
+*This repository is a mirror of the [component](http://component.io) module [component/user-agent-parser](http://github.com/component/user-agent-parser). It has been modified to work with NPM+Browserify. You can install it using the command `npm install npmcomponent/component-user-agent-parser`. Please do not open issues or send pull requests against this repo. If you have issues with this repo, report it to [npmcomponent](https://github.com/airportyh/npmcomponent).*
 # UAParser.js
 
 Lightweight JavaScript-based User-Agent string parser. Supports browser & node.js environment. Also available as Component package, Bower package, jQuery.ua, & AMD module
